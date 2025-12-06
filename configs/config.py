@@ -28,4 +28,4 @@ class PulseConfig:
     encoding_dim: int = 2048
     max_length: int = 2048
     source_max_length: int = 1224
-
+    backbone_batch:int = 1
