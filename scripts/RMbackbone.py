@@ -8,10 +8,10 @@ from transformers.modeling_outputs import BaseModelOutput
 class RMbackbone(nn.Module):
 
     def __init__(self, config: PulseConfig):
-        super.__init__()
+        super().__init__()
         self.config = config
-        self.model = AutoModel.from_pretrained(self.config.encoder)
-        self.tokenizer = AutoTokenizer.from_pretrained(self.config.encoder)\
+        self.model = AutoModel.from_pretrained(self.config.encoder, trust_remote_code=True)
+        self.tokenizer = AutoTokenizer.from_pretrained(self.config.encoder)
         
         self.source_prefix = "<|source|>"
         self.candidate_prefix = "<|candidate|>"
@@ -43,7 +43,8 @@ class RMbackbone(nn.Module):
         cand_ids = self.tokenizer.encode(
             self.candidate_prefix + response,
             add_special_tokens = False,
-            max_length = candidate_max_length
+            max_length = candidate_max_length,
+            truncation=True
         )
         
         input_ids = source_ids + cand_ids
