@@ -23,3 +23,9 @@ class PulseConfig:
     max_tokens: int = 512
     temperature: float = 1.0
 
+    #RM
+    encoder: str = "llm-blender/PairRM-hf"
+    encoding_dim: int = 2048
+    max_length: int = 2048
+    source_max_length: int = 1224
+
